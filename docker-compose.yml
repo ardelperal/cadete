@@ -4,6 +4,7 @@ services:
   webserver:
     build:
       context: ./bin/php74
+      dockerfile: Dockerfile-prod
     restart: "always"
     ports:
       - "80:80"

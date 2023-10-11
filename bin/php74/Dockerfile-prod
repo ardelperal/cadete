@@ -90,11 +90,11 @@ libpng-dev && \
 # Insure an SSL directory exists
 RUN mkdir -p /etc/apache2/ssl
 
-COPY ./www /var/www/html
-COPY ./config/php/php.ini /usr/local/etc/php/php.ini
-COPY ./config/ssl /etc/apache2/ssl/
-COPY ./config/apache2/apache2.conf /etc/apache2/apache2.conf
-COPY ./config/vhosts /etc/apache2/sites-enabled
+COPY ../../../www /var/www/html
+COPY C:\Docker\cadete\config\php/php.ini /usr/local/etc/php/php.ini
+COPY C:\Docker\cadete\config\ssl /etc/apache2/ssl/
+COPY C:\Docker\cadete\config\apache2\apache2.conf /etc/apache2/apache2.conf
+COPY C:\Docker\cadete\config\vhosts /etc/apache2/sites-enabled
 
 # Enable SSL support
 RUN a2enmod ssl && a2enmod rewrite
