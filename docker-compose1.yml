@@ -1,23 +1,14 @@
-version: "3"
+version: "3.1"
 
 services:
   webserver:
-    build:
-      context: .
-      dockerfile: Dockerfile-php74
+    image: docker.io/defensayseguridad/cadete:v02
     restart: "always"
     ports:
       - "80:80"
       - "443:443"
     links:
       - database
-    volumes:
-      - ./www:/var/www/html:rw
-      - ./config/php/php.ini:/usr/local/etc/php/php.ini
-      - ./config/ssl:/etc/apache2/ssl/
-      - ./config/apache2/apache2.conf:/etc/apache2/apache2.conf
-      - ./config/vhosts:/etc/apache2/sites-enabled
-      
     environment:
       APACHE_DOCUMENT_ROOT: /var/www/html
       PMA_PORT: 8081
@@ -25,16 +16,15 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: PMU36r7PKDs/[8E9
       HOST_MACHINE_MYSQL_PORT: 3306
+  
   database:
     build:
       context: "./bin/mysql8"
-    
     restart: "always"
     ports:
       - "3306:3306"
     volumes:
-      - ./data/mysql:/var/lib/mysql
-      
+      - database_volumen:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 0Tf06171
       MYSQL_USER: user
@@ -55,8 +45,7 @@ services:
     ports:
       - "8081:80"
       - "8443:443"
-    volumes:
-      - /sessions
-     
+volumes:
+  database_volumen:
  
   
